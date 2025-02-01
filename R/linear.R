@@ -103,8 +103,34 @@
 #' constant growth variability.
 #'
 #' @examples
-#' x <- seq(1, 18, 0.1)
-#' plot(x, linear_curve(x, L1=20, L2=70, t1=1, t2=10), type="l")
+#' # Explore initial parameter values
+#' plot(y1~x1, anscombe, xlim=c(0,15), ylim=c(0,15))
+#' x <- seq(0, 15, 0.1)
+#' lines(x, linear_curve(x, L1=5, L2=8, t1=5, t2=10), lty=3)
+#'
+#' # Prepare parameters and data
+#' init <- list(log_L1=log(5), log_L2=log(8),
+#'              log_sigma_min=log(3), log_sigma_max=log(3))
+#' dat <- list(Aoto=anscombe$x1, Loto=anscombe$y1, t1=5, t2=10)
+#' linear_objfun(init, dat)
+#'
+#' # Fit model
+#' model <- linear(init, dat)
+#' fit <- nlminb(model$par, model$fn, model$gr,
+#'               control=list(eval.max=1e4, iter.max=1e4))
+#' report <- model$report()
+#' sdreport <- sdreport(model)
+#'
+#' # Plot results
+#' Lhat <- with(report, linear_curve(x, L1, L2, t1, t2))
+#' lines(x, Lhat, lwd=2, col=2)
+#' legend("bottomright", c("initial curve","model fit"), lty=c(3,1), lwd=c(1,2),
+#'        col=c(1,2), bty="n", inset=0.02, y.intersp=1.25)
+#'
+#' # Model summary
+#' report[c("L1", "L2", "sigma_min", "sigma_max")]
+#' fit[-1]
+#' summary(sdreport)
 #'
 #' @importFrom RTMB dnorm MakeADFun REPORT
 #'

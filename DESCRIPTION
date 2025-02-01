@@ -2,11 +2,8 @@ Package: linear
 Version: 1.0.0
 Date: 2025-02-02
 Title: Linear Growth Model
-Authors@R: c(person("Arni", "Magnusson", role=c("aut","cre"), email="thisisarni@gmail.com"),
-             person("Mark", "Maunder", role="aut"))
+Authors@R: c(person("Arni", "Magnusson", role=c("aut","cre"), email="thisisarni@gmail.com"))
 Depends: RTMB
-Suggests: areaplot
-LazyData: yes
 Description: Fit growth models to otoliths and/or tagging data, using RTMB and
   maximum likelihood. The otoliths (or similar measurements of age) provide
   direct observed coordinates of age and length. The tagging data provide
